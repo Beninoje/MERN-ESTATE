@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
     },
 },{timestamps:true});
 
+//? created model 
 const User = mongoose.model('User', userSchema);
-
+//? to use it anywhere else in the application
 export default User;
