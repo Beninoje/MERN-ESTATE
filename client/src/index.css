@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/*! Reusable CSS */
+.title-color{
+    color: #333333;
+}
+.desc-color{
+    color: #666666;
+}
+.btn-color{
+    background-color: #E2BFB3;
+    border:2px solid #E2BFB3;
+}
+.btn-color:hover {
+    background-color: transparent !important;
+    border:2px solid #E2BFB3;
+}
+.primary-section{
+    background-color: #FEECE2;
+}
+.secondary-section{
+    background-color: #F7DED0;
+}
+.border-stroke{
+    border: 5px solid #B7B7B7;
+}
+.input-border-stroke{
+    border: 2px solid #d1d1d1;
+}
+
 .image_upload{
     position: absolute;
     background-color:rgba(0, 0, 0, 0.4);
