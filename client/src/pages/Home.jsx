@@ -1,30 +1,33 @@
+import { agent, partner } from '../constants';
+import {
+  comprehensiveImg, 
+  homeImage, 
+  cottage,
+  apartment,
+  townhouse,
+  hotel,
+  bungalow,
+  videoImg1
+} from '../images/index.js'
+import VideoModal from '../components/VideoModal';
+import OurAgents from '../components/OurAgents';
+import Partner from '../components/Partner';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
-import homeImage from '../images/homeImage.jpg';
-import cottage from '../images/cottage.jpg';
-import townhouse from '../images/townhouse.jpg';
-import hotel from '../images/hotel.jpg';
-import bungalow from '../images/bungalow.jpeg';
-import apartment from '../images/apartment.jpg';
-import comprehensiveImg from '../images/comprehensive.png';
-import profile1 from '../images/profile1.jpeg';
-import profile2 from '../images/profile2.jpg';
-import profile3 from '../images/profile3.jpg';
-import videoImg1 from '../images/videoImg1.png';
 
 import { FaSearch, FaMoneyBillAlt, FaRegBuilding } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import VideoModal from '../components/VideoModal';
+
 const Home = () => {
   const navigate = useNavigate();
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   SwiperCore.use([Navigation]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -262,30 +265,9 @@ const Home = () => {
             <h2 className='title-color text-4xl font-bold'>Meet Our Best Agents</h2>
             <p className='desc-color'>Meet our team of professional agents, who will help you find your dream house</p>
             <div className="flex justify-evenly items-center  pt-[50px]  w-full gap-3">
-              <div className="flex flex-col justify-center items-center gap-2">
-                <img 
-                  src={profile1} 
-                  alt=""
-                  className='w-[175px] h-[175px] object-cover rounded-full border-2 border-[#bebebe]' />
-                <h3 className='font-bold title-color text-xl'>John Doe</h3>
-                <span className='desc-color'>Real Trader</span>
-              </div>
-              <div className="flex flex-col justify-center items-center gap-2">
-                <img 
-                  src={profile2} 
-                  alt=""
-                  className='w-[175px] h-[175px] object-cover rounded-full border-2 border-[#bebebe]' />
-                <h3 className='font-bold title-color text-xl'>John Doe</h3>
-                <span className='desc-color'>Real Trader</span>
-              </div>
-              <div className="flex flex-col justify-center items-center gap-2">
-                <img 
-                  src={profile3} 
-                  alt=""
-                  className='w-[175px] h-[175px] object-cover rounded-full border-2 border-[#bebebe]' />
-                <h3 className='font-bold title-color text-xl'>John Doe</h3>
-                <span className='desc-color'>Real Trader</span>
-              </div>
+              {agent.map((agent) => (
+                <OurAgents key={agent.name} {...agent} />
+              ))}
             </div>
         </div>     
       </div>
@@ -300,7 +282,6 @@ const Home = () => {
                 <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.3)] opacity-100">
                 </div>
                 <VideoModal/>
-                
             </div>
             <div className="w-[700px] h-full flex flex-col items-start justify-start">
               <h2 className='title-color text-4xl font-bold'>Comprehensive Suite</h2>
@@ -322,10 +303,40 @@ const Home = () => {
             </div>
           </div>
       </div>
-
-
-
-
+      {/* Our Partners */}
+      <div className="py-[100px] primary-section">
+        <div className="container mx-auto flex justify-evenly items-center">
+            {partner.map(({imgURL}) => (
+              <Partner key={imgURL} imgURL={imgURL} />
+          ))}
+        </div>
+      </div>
+      {/* Reviews */}
+      <div className="flex flex-col justify-center items-center py-[100px]">
+        <div className="py-[60px]">
+          <h2 className='title-color text-4xl font-bold text-center'>Discover Our Featured Listings</h2>
+          <p className='desc-color'>These featured listings contain exclusive real estate opportunities within the city</p>
+        </div>  
+        <div className="flex justify-between container mx-auto">
+          <Swiper 
+            className='swiper-container'
+            navigation={{
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            }}
+            slidesPerView={3}
+          >
+            {offerListings.map((listing) => (
+              <SwiperSlide key={listing._id}>
+                <div className="flex justify-center">
+                <ListingItem listing={listing} />
+                </div>
+                
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
 
 
 
