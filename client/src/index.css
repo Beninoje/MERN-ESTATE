@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 /*! Reusable CSS */
+*{
+    scroll-behavior: smooth;
+}
 .title-color{
     color: #333333;
 }
@@ -29,7 +32,13 @@
 .input-border-stroke{
     border: 2px solid #d1d1d1;
 }
-
+.swiper-button-prev{
+    color: #fff; /* Example color */
+    background-color: #333; /* Example background color */
+    padding: 10px; /* Example padding */
+    border-radius: 50%; /* Example border radius */
+    transition: background-color 0.3s ease; /* Example transition */
+}
 .image_upload{
     position: absolute;
     background-color:rgba(0, 0, 0, 0.4);
