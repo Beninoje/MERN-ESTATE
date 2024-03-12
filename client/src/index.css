@@ -32,12 +32,18 @@
 .input-border-stroke{
     border: 2px solid #d1d1d1;
 }
-.swiper-button-prev{
-    color: #fff; /* Example color */
-    background-color: #333; /* Example background color */
-    padding: 10px; /* Example padding */
-    border-radius: 50%; /* Example border radius */
-    transition: background-color 0.3s ease; /* Example transition */
+/* .swiper-pagination{
+    bottom:0px !important;
+} */
+.swiper-pagination-bullet {
+    width: 8px; 
+    height: 8px; 
+    background-color: #3a3a3a; 
+    opacity: 0.5; 
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1; 
 }
 .image_upload{
     position: absolute;

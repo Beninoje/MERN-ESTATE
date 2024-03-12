@@ -1,4 +1,4 @@
-import { agent, partner } from '../constants';
+import { agent, partner, review } from '../constants';
 import {
   comprehensiveImg, 
   homeImage, 
@@ -12,9 +12,10 @@ import {
 import VideoModal from '../components/VideoModal';
 import OurAgents from '../components/OurAgents';
 import Partner from '../components/Partner';
+import Review from '../components/Review.jsx';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
@@ -22,6 +23,7 @@ import ListingItem from '../components/ListingItem';
 import { FaSearch, FaMoneyBillAlt, FaRegBuilding } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -162,7 +164,7 @@ const Home = () => {
                 </div>
                 
               </SwiperSlide>
-            ))}
+            ))} 
           </Swiper>
         </div>
       </div>
@@ -312,29 +314,28 @@ const Home = () => {
         </div>
       </div>
       {/* Reviews */}
-      <div className="flex flex-col justify-center items-center py-[100px]">
+      <div className="flex flex-col justify-center items-center py-[100px] ">
         <div className="py-[60px]">
-          <h2 className='title-color text-4xl font-bold text-center'>Discover Our Featured Listings</h2>
-          <p className='desc-color'>These featured listings contain exclusive real estate opportunities within the city</p>
+          <h2 className='title-color text-4xl font-bold text-center'>What our Users Say...</h2>
+          <p className='desc-color'>We only work with the best companies around the globe</p>
         </div>  
-        <div className="flex justify-between container mx-auto">
-          <Swiper 
+        <div className="flex justify-between  gap-2 container mx-auto relative">
+        <Swiper 
             className='swiper-container'
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            }}
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            pagination={{ clickable: true }}
             slidesPerView={3}
+            loop={true}
           >
-            {offerListings.map((listing) => (
-              <SwiperSlide key={listing._id}>
-                <div className="flex justify-center">
-                <ListingItem listing={listing} />
-                </div>
-                
-              </SwiperSlide>
+            {review.map((reviewItem) => (
+                <SwiperSlide key={reviewItem.name}>
+                  <div className="flex justify-center">
+                    <Review {...reviewItem} />
+                  </div>
+                </SwiperSlide>
             ))}
-          </Swiper>
+        </Swiper>
+
         </div>
       </div>
 
