@@ -15,6 +15,7 @@ import videoImg1 from './videoImg1.png';
 import partner1 from './partner1.png';
 import partner2 from './partner2.png';
 import partner3 from './partner3.png';
+import getStarted from './getStarted.jpg'
 
 export{
     homeImage,
@@ -33,5 +34,6 @@ export{
     videoImg1,
     partner1,
     partner2,
-    partner3
+    partner3,
+    getStarted
 }

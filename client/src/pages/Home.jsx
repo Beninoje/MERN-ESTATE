@@ -7,7 +7,8 @@ import {
   townhouse,
   hotel,
   bungalow,
-  videoImg1
+  videoImg1,
+  getStarted
 } from '../images/index.js'
 import VideoModal from '../components/VideoModal';
 import OurAgents from '../components/OurAgents';
@@ -23,6 +24,7 @@ import ListingItem from '../components/ListingItem';
 import { FaSearch, FaMoneyBillAlt, FaRegBuilding } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Footer from '../components/Footer.jsx';
 
 
 const Home = () => {
@@ -115,7 +117,7 @@ const Home = () => {
         </div>
         
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220"><path fill="#FEECE2" fill-opacity="1" d="M0,128L120,138.7C240,149,480,171,720,170.7C960,171,1200,149,1320,138.7L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" className='h-full' viewBox="0 0 1440 220"><path fill="#FEECE2" fill-opacity="1" d="M0,128L120,138.7C240,149,480,171,720,170.7C960,171,1200,149,1320,138.7L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
       <div className="primary-section py-[50px] flex flex-col items-center justify-center w-full">    
         <h2 className='title-color text-4xl font-bold text-center'>How it works?</h2>
         <div className="flex justify-center items-center container mx-auto flex-wrap mt-[50px]  gap-4">
@@ -338,13 +340,29 @@ const Home = () => {
 
         </div>
       </div>
+      <div className="py-[100px]">
+        <div className="container mx-auto">
+          <div className="relative rounded-[40px]">
+            <img 
+              src={getStarted} 
+              alt="" 
+              className='w-full block rounded-[40px] h-[400px] object-cover'/>
+              <div class="absolute rounded-[40px] top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] opacity-100">
+              </div>
+              <div className="absolute top-1/2 -translate-y-1/2 flex justify-between items-center z-10 w-full px-[50px]">
+                <h2 className='text-4xl font-bold'>Are You Ready to <br></br>Become a Agent?</h2>
+                <a href="/sign-up" className='bg-black py-[15px] px-[30px] text-white text-lg font-semibold rounded-full transition-all duration-300  hover:bg-[#F7DED0] hover:text-black'> Get Started</a>
+              </div>
+          </div>
+        </div>
+      </div>
+      {/* FOOTER */}
+      <Footer/>       
 
 
 
 
-
-
-      <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'>
+      {/* <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'>
         {offerListings && offerListings.length > 0 && (
           <div className="">
             <div className='my-3'>
@@ -385,6 +403,7 @@ const Home = () => {
           </div>
         )}
       </div>
+    </div> */}
     </div>
   )
 }
