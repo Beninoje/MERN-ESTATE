@@ -88,19 +88,19 @@ const Home = () => {
   return (
     <div>
       {/* top */}
-      <div className="flex flex-col lg:flex-row lg:gap-[40px] justify-between items-center container mx-auto pt-[100px] pb-[50px] ">
-        <div className="order-2 lg:order-1 lg:text-left md:items-center sm:text-center flex flex-col justify-center lg:items-start">
+      <div className="flex flex-col lg:flex-row lg:gap-[40px] justify-between items-center container mx-auto pt-[100px] pb-[50px] px-4 ">
+        <div className="order-2 lg:order-1 lg:text-left md:items-center items-center text-center flex flex-col justify-center lg:items-start">
             <h1 className='title-color text-6xl font-bold sm:pt-8'>Discover <br></br>Most Suitable Property</h1>
             <p className='desc-color text-xl py-[30px]'>Find a variety of properties that suit you very easily <br></br>& forget all difficulties in finding a residence for you</p>
             <form
               onSubmit={handleSubmit}
-              className='rounded-lg flex items-center input-border-stroke w-[600px] p-3'
+              className='w-[400px] rounded-lg flex items-center input-border-stroke md:w-[600px]  p-3'
             >
             <FaSearch className='text-slate-600 absolute text-xl' />
             <input
                 type='text'
                 placeholder='Ex: Modern...'
-                className='relative bg-transparent focus:outline-none w-[500px] rounded-lg pl-[40px] text-xl'
+                className='relative bg-transparent focus:outline-none w-[350px] md:w-[500px] rounded-lg pl-[40px] text-xl'
                 value={searchTerm}
                 onChange={(e)=>setSearchTerm(e.target.value)}
             />
@@ -118,7 +118,7 @@ const Home = () => {
         
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" className='h-full' viewBox="0 0 1440 220"><path fill="#FEECE2" fill-opacity="1" d="M0,128L120,138.7C240,149,480,171,720,170.7C960,171,1200,149,1320,138.7L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
-      <div className="primary-section py-[50px] flex flex-col items-center justify-center w-full">    
+      <div className="primary-section py-[50px] flex flex-col items-center justify-center w-full ">    
         <h2 className='title-color text-4xl font-bold text-center'>How it works?</h2>
         <div className="container mx-auto grid max-w-md grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-3 mt-[50px] md:px-4 gap-4">
           <div className="flex flex-col  w-full items-center justify-center text-center sm:py-[30px] md:py-[60px] px-[40px]">
@@ -145,12 +145,12 @@ const Home = () => {
         </div>
       </div>
       {/* listings results for offer, sale, and rent */}
-      <div className="flex flex-col justify-center items-center py-[100px]">
+      <div className="flex flex-col justify-center items-center py-[100px] px-4">
         <div className="py-[60px]">
           <h2 className='title-color text-4xl font-bold text-center'>Discover Our Featured Listings</h2>
           <p className='desc-color'>These featured listings contain exclusive real estate opportunities within the city</p>
         </div>  
-        <div className="flex justify-between container mx-auto">
+        <div className="flex justify-between container mx-auto px-4">
           <Swiper 
             className='swiper-container'
             breakpoints={{
@@ -181,7 +181,7 @@ const Home = () => {
       </div>
       
       {/* Explore House Types */}
-      <div className="py-[100px] primary-section">
+      <div className="py-[100px] primary-section px-4">
         <div className="container mx-auto flex flex-col justify-center items-center">
             <div className="text-center py-[60px]">
               <h2 className='title-color text-4xl font-bold'>Explore House Types</h2>
@@ -261,11 +261,11 @@ const Home = () => {
               <img 
                 src={comprehensiveImg} 
                 alt=""
-                className='md:w-full sm:w-[500px] block object-cover rounded-lg' />
-                <div class="absolute sm:w-[500px] md:w-full rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.3)] opacity-100">
+                className='w-full block object-cover rounded-lg' />
+                <div class="absolute  rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.3)] opacity-100">
                 </div>
             </div>
-            <div className="w-[700px] h-full flex flex-col items-start justify-start pt-[40px]">
+            <div className="w-full md:w-[700px] h-full flex flex-col items-start justify-start pt-[40px]">
               <h2 className='title-color text-4xl font-bold'>Comprehensive Suite</h2>
               <p className='desc-color mt-[40px]'>Explore our comprehensive suite of social media marketing services designed to connect your brand with your target audience and achieve your business goals. Our mission is to turn your social media presence into a success story.</p>
               <div className="flex item-center gap-3 py-3 mt-[40px]">
@@ -290,7 +290,7 @@ const Home = () => {
       </div>
       {/* Our Agents */}
       <div className="py-[100px] primary-section">
-        <div className="container mx-auto flex flex-col justify-center items-center">
+        <div className="container mx-auto flex flex-col justify-center items-center px-4">
             <h2 className='title-color text-4xl font-bold'>Meet Our Best Agents</h2>
             <p className='desc-color'>Meet our team of professional agents, who will help you find your dream house</p>
             <div className="container mx-auto grid max-w-md grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-3 mt-[40px] lg:gap-0 gap-[40px]">
@@ -300,7 +300,7 @@ const Home = () => {
             </div>
         </div>     
       </div>
-      {/* Our Agents */}
+      {/* House Tour */}
       <div className="py-[100px]">
           <div className="container md:mx-auto lg:flex lg:flex-row lg:items-center lg:justify-center sm:flex-col sm:justify-center sm:items-center gap-8 px-6 ">
             <div className="relative flex-0 order-1">
@@ -312,7 +312,7 @@ const Home = () => {
                 </div>
                 <VideoModal/>
             </div>
-            <div className="w-[700px] h-full flex flex-col items-start justify-start sm:pt-[40px]">
+            <div className="w-full md:w-[700px] h-full flex flex-col items-start justify-start sm:pt-[40px]">
               <h2 className='title-color text-4xl font-bold'>Comprehensive Suite</h2>
               <p className='desc-color mt-[40px]'>Explore our comprehensive suite of social media marketing services designed to connect your brand with your target audience and achieve your business goals. Our mission is to turn your social media presence into a success story.</p>
               <div className="flex item-center gap-3 py-3 mt-[40px]">
@@ -333,7 +333,7 @@ const Home = () => {
           </div>
       </div>
       {/* Our Partners */}
-      <div className="py-[100px] primary-section">
+      <div className="py-[100px] primary-section px-4">
         <div className="container mx-auto grid max-w-md grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-4">
             {partner.map(({imgURL}) => (
               <Partner key={imgURL} imgURL={imgURL} />
@@ -341,7 +341,7 @@ const Home = () => {
         </div>
       </div>
       {/* Reviews */}
-      <div className="flex flex-col justify-center items-center py-[100px] ">
+      <div className="flex flex-col justify-center items-center py-[100px] px-4">
         <div className="py-[60px]">
           <h2 className='title-color text-4xl font-bold text-center'>What our Users Say...</h2>
           <p className='desc-color'>We only work with the best companies around the globe</p>
@@ -379,7 +379,7 @@ const Home = () => {
 
         </div>
       </div>
-      <div className="py-[100px]">
+      <div className="py-[100px] px-4">
         <div className="container mx-auto">
           <div className="relative rounded-[40px]">
             <img 
