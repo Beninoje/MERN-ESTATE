@@ -89,8 +89,8 @@ const Home = () => {
     <div>
       {/* top */}
       <div className="flex flex-col lg:flex-row lg:gap-[40px] justify-between items-center container mx-auto pt-[100px] pb-[50px] ">
-        <div className="order-2 lg:order-1">
-            <h1 className='title-color text-6xl font-bold'>Discover Most Suitable Property</h1>
+        <div className="order-2 lg:order-1 lg:text-left md:items-center sm:text-center flex flex-col justify-center lg:items-start">
+            <h1 className='title-color text-6xl font-bold sm:pt-8'>Discover <br></br>Most Suitable Property</h1>
             <p className='desc-color text-xl py-[30px]'>Find a variety of properties that suit you very easily <br></br>& forget all difficulties in finding a residence for you</p>
             <form
               onSubmit={handleSubmit}
@@ -120,22 +120,22 @@ const Home = () => {
       <svg xmlns="http://www.w3.org/2000/svg" className='h-full' viewBox="0 0 1440 220"><path fill="#FEECE2" fill-opacity="1" d="M0,128L120,138.7C240,149,480,171,720,170.7C960,171,1200,149,1320,138.7L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
       <div className="primary-section py-[50px] flex flex-col items-center justify-center w-full">    
         <h2 className='title-color text-4xl font-bold text-center'>How it works?</h2>
-        <div className="flex justify-center items-center container mx-auto flex-wrap mt-[50px]  gap-4">
-          <div className="flex-1 flex flex-col items-center justify-center text-center py-[60px]">
+        <div className="container mx-auto grid max-w-md grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-3 mt-[50px] md:px-4 gap-4">
+          <div className="flex flex-col  w-full items-center justify-center text-center sm:py-[30px] md:py-[60px] px-[40px]">
               <div className="p-5 bg-slate-600 rounded-[20px]">
                 <FaSearch className='text-slate-100 text-xl' />
               </div>
             <h2 className='title-color text-xl font-semibold pt-[30px]'>Search for your comfort</h2>
             <p className='desc-color'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi veniam cumque modi vitae harum.</p>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center text-center py-[60px] px-5">
+          <div className="flex flex-col w-full items-center justify-center text-center sm:py-[30px] md:py-[60px] px-[40px]">
             <div className="p-5 bg-slate-600 rounded-[20px]">
               <FaMoneyBillAlt className='text-slate-100 text-xl' />
             </div>
             <h2 className='title-color text-xl font-semibold pt-[30px]'>Instant Valuation</h2>
             <p className='desc-color'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi veniam cumque modi vitae harum.</p>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center text-center py-[60px]">
+          <div className="flex flex-col w-full items-center justify-center text-center sm:py-[30px] md:py-[60px] px-[40px]">
             <div className="p-5 bg-slate-600 rounded-[20px]">
               <FaRegBuilding className='text-slate-100 text-xl' />
             </div>
@@ -153,11 +153,20 @@ const Home = () => {
         <div className="flex justify-between container mx-auto">
           <Swiper 
             className='swiper-container'
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
+            breakpoints={{
+              425:{
+                slidesPerView:1,
+              },
+              768:{
+                slidesPerView:2,
+              },
+              1024:{
+                slidesPerView:2,
+              },
+              1300:{
+                slidesPerView:3,
+              }
             }}
-            slidesPerView={3}
           >
             {offerListings.map((listing) => (
               <SwiperSlide key={listing._id}>
@@ -178,26 +187,33 @@ const Home = () => {
               <h2 className='title-color text-4xl font-bold'>Explore House Types</h2>
               <p className='desc-color'>Explore all the different types of apartments so you can choose the best option for you</p>
             </div>
-            <div class="grid grid-cols-4 gap-4">
-                <div class="row-span-3 relative">
-                    <img 
-                      src={hotel} 
-                      alt=""
-                      className='h-full w-[300px] object-cover block rounded-lg' />
-                      <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
-                        <p class="text-center title-color text-3xl font-semibold">Hotel</p>
-                      </div>
+            <div class="w-full">
+              <div class="flex flex-col lg:grid lg:gap-4 2xl:gap-6 lg:grid-cols-4 2xl:row-span-2 2xl:pb-8 ml-2 pt-4 px-6">
+                <div class="lg:order-1 lg:row-span-1 2xl:row-span-1 lg:col-span-2 rounded-lg ">
+                  <div class="relative">
+                  <img 
+                    src={apartment} 
+                    alt=""
+                    className='h-[400px] w-full object-cover block rounded-lg' />
+                    <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
+                      <p class="text-center title-color text-3xl font-semibold">Apartment</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="row-span-2 relative">
-                    <img 
-                      src={bungalow} 
-                      alt=""
-                      className='h-full w-[300px] object-cover block rounded-lg' />
-                      <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
-                        <p class="text-center title-color text-3xl font-semibold">Bungalow</p>
-                      </div>
+                <div class="lg:order-2 lg:row-span-1 2xl:row-span-1 lg:col-span-1 rounded-lg ">
+                  <div class="relative">
+                  <img 
+                    src={hotel} 
+                    alt=""
+                    className='h-[400px] w-full object-cover block rounded-lg' />
+                    <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
+                      <p class="text-center title-color text-3xl font-semibold">Hotel</p>
+                    </div>
+                  </div>
+                  
                 </div>
-                <div class="col-span-2 relative">
+                <div class="lg:order-3 lg:row-span-2 2xl:row-span-1 lg:col-span-1 rounded-lg ">
+                  <div class="relative">
                     <img 
                       src={townhouse} 
                       alt=""
@@ -205,42 +221,51 @@ const Home = () => {
                       <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
                         <p class="text-center title-color text-3xl font-semibold">Townhouse</p>
                       </div>
+                  </div>
+                  
                 </div>
-                <div class="col-span-2 relative">
-                    <img 
-                      src={apartment} 
-                      alt=""
-                      className='h-[300px] w-full object-cover block rounded-lg' />
-                      <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
-                        <p class="text-center title-color text-3xl font-semibold">Apartment</p>
-                      </div>
-                </div>
-                <div class="col-span-3 relative">
+                <div class="lg:order-4 lg:row-span-2 2xl:row-span-1 col-span-2 rounded-lg  h-full lg:pb-14 2xl:pb-20">
+                  <div class="relative h-full ">
                     <img 
                       src={cottage} 
                       alt=""
                       className='w-full h-[300px] object-cover block rounded-lg' />
                       <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
+                        <p class="text-center title-color text-3xl font-semibold">Bungalow</p>
+                      </div>
+                  </div>
+                  
+                </div>
+                <div class="lg:order-2 lg:row-span-4 lg:col-span-1 rounded-lg lg:pb-4 2xl:h-screen">
+                  <div class="relative">
+                    <img 
+                      src={bungalow} 
+                      alt=""
+                      className='h-[715px] w-full object-cover block rounded-lg' />
+                      <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.5)] flex justify-center items-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 z-10">
                         <p class="text-center title-color text-3xl font-semibold">Cottage</p>
                       </div>
+                  </div>
+                  
                 </div>
+              </div>
             </div>
+
         </div>
-          
       </div>
 
       {/* Comprehensive Suite */}
-      <div className="py-[100px]">
-          <div className="container mx-auto flex items-center justify-center gap-8">
-            <div className="p-3 relative flex-0">
+      <div className="py-[100px] ">
+          <div className="container md:mx-auto lg:flex lg:flex-row lg:items-center lg:justify-center sm:flex-col sm:justify-center sm:items-center gap-8 px-6">
+            <div className="relative flex-0 order-0">
               <img 
                 src={comprehensiveImg} 
                 alt=""
-                className='w-full block object-cover rounded-lg' />
-                <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.3)] opacity-100">
+                className='md:w-full sm:w-[500px] block object-cover rounded-lg' />
+                <div class="absolute sm:w-[500px] md:w-full rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.3)] opacity-100">
                 </div>
             </div>
-            <div className="w-[700px] h-full flex flex-col items-start justify-start">
+            <div className="w-[700px] h-full flex flex-col items-start justify-start pt-[40px]">
               <h2 className='title-color text-4xl font-bold'>Comprehensive Suite</h2>
               <p className='desc-color mt-[40px]'>Explore our comprehensive suite of social media marketing services designed to connect your brand with your target audience and achieve your business goals. Our mission is to turn your social media presence into a success story.</p>
               <div className="flex item-center gap-3 py-3 mt-[40px]">
@@ -268,7 +293,7 @@ const Home = () => {
         <div className="container mx-auto flex flex-col justify-center items-center">
             <h2 className='title-color text-4xl font-bold'>Meet Our Best Agents</h2>
             <p className='desc-color'>Meet our team of professional agents, who will help you find your dream house</p>
-            <div className="flex justify-evenly items-center  pt-[50px]  w-full gap-3">
+            <div className="container mx-auto grid max-w-md grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-3 mt-[40px] lg:gap-0 gap-[40px]">
               {agent.map((agent) => (
                 <OurAgents key={agent.name} {...agent} />
               ))}
@@ -277,17 +302,17 @@ const Home = () => {
       </div>
       {/* Our Agents */}
       <div className="py-[100px]">
-          <div className="container mx-auto flex items-center justify-center gap-8">
+          <div className="container md:mx-auto lg:flex lg:flex-row lg:items-center lg:justify-center sm:flex-col sm:justify-center sm:items-center gap-8 px-6 ">
             <div className="relative flex-0 order-1">
               <img 
                 src={videoImg1} 
                 alt=""
-                className='w-full block object-cover rounded-lg relative' />
-                <div class="absolute rounded-lg top-0 left-0 w-full h-full bg-[rgba(255,190,152,0.3)] opacity-100">
+                className='lg:w-full md:h-[700px] md:w-[600px] sm:w-full sm:h-[700px] block object-cover rounded-lg relative' />
+                <div class="absolute rounded-lg top-0 left-0 md:h-[700px] md:w-[600px] lg:w-full lg:h-full sm:h-[700px] sm:w-full bg-[rgba(255,190,152,0.3)] opacity-100">
                 </div>
                 <VideoModal/>
             </div>
-            <div className="w-[700px] h-full flex flex-col items-start justify-start">
+            <div className="w-[700px] h-full flex flex-col items-start justify-start sm:pt-[40px]">
               <h2 className='title-color text-4xl font-bold'>Comprehensive Suite</h2>
               <p className='desc-color mt-[40px]'>Explore our comprehensive suite of social media marketing services designed to connect your brand with your target audience and achieve your business goals. Our mission is to turn your social media presence into a success story.</p>
               <div className="flex item-center gap-3 py-3 mt-[40px]">
@@ -309,7 +334,7 @@ const Home = () => {
       </div>
       {/* Our Partners */}
       <div className="py-[100px] primary-section">
-        <div className="container mx-auto flex justify-evenly items-center">
+        <div className="container mx-auto grid max-w-md grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-4">
             {partner.map(({imgURL}) => (
               <Partner key={imgURL} imgURL={imgURL} />
           ))}
@@ -326,7 +351,21 @@ const Home = () => {
             className='swiper-container'
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             pagination={{ clickable: true }}
-            slidesPerView={3}
+            breakpoints={{
+              425:{
+                slidesPerView:1,
+              },
+              768:{
+                slidesPerView:1,
+              },
+              1024:{
+                slidesPerView:2,
+              },
+              1300:{
+                slidesPerView:3,
+              }
+            }}
+            
             loop={true}
           >
             {review.map((reviewItem) => (

@@ -22,15 +22,36 @@ const VideoModal = () => {
   }
   return (
     <div>
-        <div className="absolute bottom-[-20px] right-[-20px]">
+                <div 
+                className="
+                  absolute 
+                  xl:bottom-[-20px] 
+                  xl:right-[-20px]
+                  lg:bottom-[-20px] 
+                  lg:right-[-20px]
+                  md:bottom-[-30px] 
+                  md:right-[0px]
+                  sm:bottom-[-10px] 
+                  sm:right-[-10px]"
+                >
                   <img 
                     src={videoImg2} 
                     alt=""
-                    className='w-[300px] h-[300px] rounded-lg relative border-[3px] border-[#FFBE98]' />
+                    className='
+                    lg:w-[200px] 
+                    lg:h-[200px] 
+                    md:w-[200px] 
+                    md:h-[200px] 
+                    sm:w-[150px] 
+                    sm:h-[150px]
+                    rounded-lg 
+                    relative 
+                    border-[3px] 
+                    border-[#FFBE98]' 
+                  />
                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
-                      
-                        <button className='cursor-pointer z-10' onClick={handleVideo}>
-                          <svg width="129" height="123" viewBox="0 0 129 123" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button className='cursor-pointer z-10 lg:w-[100px] md:w-[90px] sm:w-[90px]' onClick={handleVideo}>
+                          <svg viewBox="0 0 129 123" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M64.5 112.75C94.185 112.75 118.25 89.8043 118.25 61.5C118.25 33.1954 94.185 10.25 64.5 10.25C34.8147 10.25 10.75 33.1954 10.75 61.5C10.75 89.8043 34.8147 112.75 64.5 112.75Z" fill="#333333"/>
                             <path d="M82.8486 66.9274L57.4776 81.2097C53.3937 83.5088 48.375 80.5163 48.375 75.7824V47.2174C48.375 42.4835 53.3937 39.4913 57.4776 41.7902L82.8486 56.0726C87.0503 58.4383 87.0503 64.5617 82.8486 66.9274Z" fill="#333333"/>
                           </svg>
