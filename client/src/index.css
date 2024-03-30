@@ -32,6 +32,9 @@
 .input-border-stroke{
     border: 2px solid #d1d1d1;
 }
+.listing-border-stroke{
+    border: 1px solid #E1E1E1;
+}
 /* .swiper-pagination{
     bottom:0px !important;
 } */

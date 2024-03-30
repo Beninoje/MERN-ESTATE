@@ -25,22 +25,22 @@ const Header = () => {
   }, [location.search]);
   return (
 <header className='w-full fixed top-0 left-0'>
-      <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
-      <div className='font-bold text-2xl cursor-pointer flex items-center
-      text-gray-800'>
-        <Link to='/'>
-            <h1 className='font-bold text-xl flex flex-wrap'>
-              <span className='text-[#333333]'>MERN</span>
-              <span className='text-[#E2BFB3]'>Estate</span>
-            </h1>
-          </Link>
-      </div>
+      <div className='md:flex items-center justify-between z-[10] bg-white py-4 md:px-10 px-7'>
+        <div className='font-bold text-2xl cursor-pointer flex items-center
+        text-gray-800'>
+          <Link to='/'>
+              <h1 className='font-bold text-xl flex flex-wrap'>
+                <span className='text-[#333333]'>MERN</span>
+                <span className='text-[#E2BFB3]'>Estate</span>
+              </h1>
+            </Link>
+        </div>
       
       <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-4 cursor-pointer md:hidden'>
         <ion-icon name={open ? 'close':'menu'}></ion-icon>
       </div>
 
-      <ul className={`md:flex md:items-center md:justify-between md:gap-5 md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full  md:w-auto md:pl-0 pl-9 transition-all duration-300 ease-in-out ${open ? 'top-[60px] ':'top-[-490px]'}`}>
+      <ul className={`md:flex md:items-center md:justify-between md:gap-5 md:pb-0 pb-12 absolute md:static bg-white md:z-10 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-300 ease-in-out ${open ? 'top-[60px] ':'top-[-490px]'}` }>
           <Link to='/about'>
             <li className='inline text-slate-700 hover:underline'>
               About
