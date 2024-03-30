@@ -188,8 +188,8 @@ const Home = () => {
               <p className='desc-color'>Explore all the different types of apartments so you can choose the best option for you</p>
             </div>
             <div class="w-full">
-              <div class="flex flex-col lg:grid lg:gap-4 2xl:gap-6 lg:grid-cols-4 2xl:row-span-2 2xl:pb-8 ml-2 pt-4 px-6">
-                <div class="lg:order-1 lg:row-span-1 2xl:row-span-1 lg:col-span-2 rounded-lg ">
+              <div class="flex flex-col lg:grid lg:gap-4 2xl:gap-6 lg:grid-cols-4 2xl:row-span-2 2xl:pb-8 ml-2 pt-4 px-6 gap-4">
+                <div class="lg:order-1 lg:row-span-1 2xl:row-span-1 lg:col-span-2 rounded-lg">
                   <div class="relative">
                   <img 
                     src={apartment} 
@@ -200,7 +200,7 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div class="lg:order-2 lg:row-span-1 2xl:row-span-1 lg:col-span-1 rounded-lg ">
+                <div class="lg:order-2 lg:row-span-1 2xl:row-span-1 lg:col-span-1 rounded-lg">
                   <div class="relative">
                   <img 
                     src={hotel} 
@@ -212,7 +212,7 @@ const Home = () => {
                   </div>
                   
                 </div>
-                <div class="lg:order-3 lg:row-span-2 2xl:row-span-1 lg:col-span-1 rounded-lg ">
+                <div class="lg:order-3 lg:row-span-2 2xl:row-span-1 lg:col-span-1 rounded-lg">
                   <div class="relative">
                     <img 
                       src={townhouse} 
@@ -224,7 +224,7 @@ const Home = () => {
                   </div>
                   
                 </div>
-                <div class="lg:order-4 lg:row-span-2 2xl:row-span-1 col-span-2 rounded-lg  h-full lg:pb-14 2xl:pb-20">
+                <div class="lg:order-4 lg:row-span-2 2xl:row-span-1 col-span-2 rounded-lg  h-full lg:pb-14 2xl:pb-20 ">
                   <div class="relative h-full ">
                     <img 
                       src={cottage} 

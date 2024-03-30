@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
+
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState('');
+  const [open,setOpen] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,17 +24,25 @@ const Header = () => {
     }
   }, [location.search]);
   return (
-    <header className=''>
-      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+<header className='w-full fixed top-0 left-0'>
+      <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
+      <div className='font-bold text-2xl cursor-pointer flex items-center
+      text-gray-800'>
         <Link to='/'>
-          <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-            <span className='text-[#333333]'>MERN</span>
-            <span className='text-[#E2BFB3]'>Estate</span>
-          </h1>
-        </Link>
-        <ul className='flex gap-4'>
+            <h1 className='font-bold text-xl flex flex-wrap'>
+              <span className='text-[#333333]'>MERN</span>
+              <span className='text-[#E2BFB3]'>Estate</span>
+            </h1>
+          </Link>
+      </div>
+      
+      <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-4 cursor-pointer md:hidden'>
+        <ion-icon name={open ? 'close':'menu'}></ion-icon>
+      </div>
+
+      <ul className={`md:flex md:items-center md:justify-between md:gap-5 md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-300 ease-in-out ${open ? 'top-20 ':'top-[-490px]'}`}>
           <Link to='/about'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
+            <li className='inline text-slate-700 hover:underline'>
               About
             </li>
           </Link>
@@ -47,7 +57,7 @@ const Header = () => {
               <li className=' text-slate-700 hover:underline'> Sign in</li>
             )}
           </Link>
-        </ul>
+      </ul>
       </div>
     </header>
   )
