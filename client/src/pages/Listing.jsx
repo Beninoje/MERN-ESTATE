@@ -51,29 +51,22 @@ export default function Listing() {
   }, [params.listingId]);
 
   return (
-    <main>
+    <main className='mt-[70px]'>
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
       {listing && !loading && !error && (
+        
         <div>
-          <Swiper navigation>
-            {listing.imageUrls.map((url) => (
-              <SwiperSlide key={url}>
-                <div
-                  className='h-[550px]'
-                  style={{
-                    background: `url(${url}) center no-repeat`,
-                    backgroundSize: 'cover',
-                  }}
-                ></div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
-            <FaShare
-              className='text-slate-500'
+          <div className="flex justify-center items-center px-4 py-3">
+            <div className="w-full">
+              <h2 className='text-center text-3xl title-color font-semibold'>
+                {listing.name}
+              </h2>
+            </div>
+            <div 
+              className="relative hover:cursor-pointer flex items-center gap-2 rounded-full secondary-section hover:opacity-70 transition-all duration-300 py-1 px-4"
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
                 setCopied(true);
@@ -81,10 +74,30 @@ export default function Listing() {
                   setCopied(false);
                 }, 2000);
               }}
-            />
+            >
+              <FaShare className='desc-color'/>
+                <span className='text-lg font-semibold desc-color'>Share</span>
+            </div>
           </div>
+          <div className="">
+            {listing.imageUrls.map((url) => (
+                <SwiperSlide key={url}>
+                  <div
+                    className='h-[550px]'
+                    style={{
+                      background: `url(${url}) center no-repeat`,
+                      backgroundSize: 'cover',
+                    }}
+                  ></div>
+                </SwiperSlide>
+              ))}
+          </div>
+            
+          {/* <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
+            
+          </div> */}
           {copied && (
-            <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2'>
+            <p className='fixed top-0 right-0 z-10 rounded-md bg-slate-100 p-2'>
               Link copied!
             </p>
           )}

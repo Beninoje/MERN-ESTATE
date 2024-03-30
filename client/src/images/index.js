@@ -16,7 +16,14 @@ import partner1 from './partner1.png';
 import partner2 from './partner2.png';
 import partner3 from './partner3.png';
 import getStarted from './getStarted.jpg'
-
+import listing1 from './listing1.jpg';
+import listing2 from './listing2.jpg';
+import listing3 from './listing3.jpg';
+import listing4 from './listing4.jpg';
+import listing5 from './listing5.jpg';
+import listing6 from './listing6.jpg';
+import listing7 from './listing7.jpg';
+import listing8 from './listing8.jpg';
 export{
     homeImage,
     cottage,
@@ -35,5 +42,13 @@ export{
     partner1,
     partner2,
     partner3,
-    getStarted
+    getStarted,
+    listing1,
+    listing2,
+    listing3,
+    listing4,
+    listing5,
+    listing6,
+    listing7,
+    listing8
 }

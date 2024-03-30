@@ -40,7 +40,7 @@ const Header = () => {
         <ion-icon name={open ? 'close':'menu'}></ion-icon>
       </div>
 
-      <ul className={`md:flex md:items-center md:justify-between md:gap-5 md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-300 ease-in-out ${open ? 'top-20 ':'top-[-490px]'}`}>
+      <ul className={`md:flex md:items-center md:justify-between md:gap-5 md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full  md:w-auto md:pl-0 pl-9 transition-all duration-300 ease-in-out ${open ? 'top-[60px] ':'top-[-490px]'}`}>
           <Link to='/about'>
             <li className='inline text-slate-700 hover:underline'>
               About
