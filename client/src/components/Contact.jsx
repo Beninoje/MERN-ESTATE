@@ -7,7 +7,6 @@ const  Contact = ({listing,onClose }) => {
   const [landlord, setLandlord] = useState(null);
   const { currentUser} = useSelector((state) => state.user);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  //const [message, setMessage] = useState('');
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
@@ -21,18 +20,9 @@ const  Contact = ({listing,onClose }) => {
     fetchLandlord();
   }, [listing.userRef]);
   const handleRecaptchaChange = (value) => {
-    console.log("reCAPTCHA value: ",value);
+    console.log("reCAPTCHA value: ", value);
   };
 
-  // window.addEventListener('load', () => {
-  //   const $recaptcha = document.querySelector('#g-recaptcha-response');
-  //   if ($recaptcha) {
-  //       $recaptcha.setAttribute('required', 'required');
-  //   }
-  //   });
-  // const onChange = (e) => {
-  //   setMessage(e.target.value);
-  // }
   return (
     <>
     {landlord &&(

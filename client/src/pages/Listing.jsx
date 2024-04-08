@@ -28,8 +28,6 @@ export default function Listing() {
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
-  
- 
   const handleOpenContact = () => {
     setContactOpen(true);
   };
@@ -66,7 +64,6 @@ export default function Listing() {
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
       {listing && !loading && !error && (
-        
         <div>
           <div className="flex justify-center items-center px-4 py-3">
             <div className="w-full">
@@ -125,8 +122,8 @@ export default function Listing() {
               Link copied!
             </p>
           )}
-          <div className='grid grid-cols-2 container mx-auto my-7 gap-4'>
-            <div className="flex justify-between items-center rounded-md listing-border-stroke px-4 py-9">
+          <div className='grid grid-cols-4 container mx-auto my-7 gap-4'>
+            <div className="flex col-span-3 justify-between items-center rounded-md listing-border-stroke px-4 py-9">
               <div className="">
                 <h2 className='text-3xl font-semibold title-color pb-4'>
                   ${listing.offer
@@ -134,7 +131,7 @@ export default function Listing() {
                     : listing.regularPrice.toLocaleString('en-US')}
                   {listing.type === 'rent' && ' / month'}
                 </h2>
-                    <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
+                    <p className='bg-[#e29f88] w-full max-w-[200px] text-white text-center p-1 rounded-md'>
                     {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
                   </p>
                     {listing.offer && (
@@ -200,25 +197,27 @@ export default function Listing() {
               </div>
             </div>
             
-            <div className="">
+            <div className="col-span-1 flex flex-col items-start justify-start rounded-md listing-border-stroke px-4 py-9">
+              <h3 className='title-color font-semibold text-2xl'>Contact Owner</h3>
               {currentUser && listing.userRef !== currentUser._id && !contactOpen && (
                 <button
                   onClick={handleOpenContact}
-                  className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
+                  className='mt-5 hover:shadow-form rounded-full bg-[#e29f88] transition-all ease-in duration-200 hover:opacity-80 py-2 px-8 text-base font-semibold text-white outline-none'
                 >
-                  Contact landlord
+                  Email
                 </button>
               )}
               {contactOpen && (
                   <Contact listing={listing} onClose={handleCloseContact} />
               )}
             </div>
-            <p className='text-slate-800'>
-              <span className='font-semibold text-black'>Description - </span>
-              {listing.description}
-            </p>
-            <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
-              
+            <div className="col-span-3 rounded-md listing-border-stroke px-4 py-9 flex flex-col justify-start items-start">
+              <h3 className='font-semibold title-color text-4xl'>Listing Description</h3>
+              <p className='text-color pt-4'>
+                {listing.description}
+              </p>
+              <h3 className='font-semibold title-color text-2xl py-4'>Property Summary</h3>
+              <ul className='text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
               <li className='flex items-center gap-1 whitespace-nowrap '>
                 <FaParking className='text-lg' />
                 {listing.parking ? 'Parking spot' : 'No Parking'}
@@ -228,6 +227,9 @@ export default function Listing() {
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
             </ul>
+            </div>
+            
+            
             
           </div>
         </div>
