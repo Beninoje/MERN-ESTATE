@@ -19,15 +19,24 @@ import Contact from '../components/Contact';
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
 export default function Listing() {
-  SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [contact, setContact] = useState(false);
+  // const [contact, setContact] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
+  
+ 
+  const handleOpenContact = () => {
+    setContactOpen(true);
+  };
+
+  const handleCloseContact = () => {
+    setContactOpen(false);
+  };
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -81,28 +90,28 @@ export default function Listing() {
           </div>
           <div className="flex justify-center container mx-auto gap-3 ">
               {listing.imageUrls.length > 0 && (
-                <div className="w-full flex-1">
+                <div className="w-full cursor-pointer flex-1">
                     <img src={listing.imageUrls[0]} alt="" className='w-full h-full rounded-md' />
                 </div> 
               )}
               <div className="grid grid-cols-2 gap-4 flex-1">
                 {listing.imageUrls.length > 0 && (
-                  <div className="w-full">
-                      <img src={listing.imageUrls[1]} className='w-full rounded-md' alt="" />
+                  <div className="w-full cursor-pointer ">
+                      <img src={listing.imageUrls[1]} className='w-full rounded-md object-contain overflow-hidden' alt="" />
                   </div> 
                 )}
                 {listing.imageUrls.length > 0 && (
-                  <div className="w-full">
+                  <div className="w-full cursor-pointer">
                       <img src={listing.imageUrls[2]} className='w-full rounded-md' alt="" />
                   </div> 
                 )}
                 {listing.imageUrls.length > 0 && (
-                  <div className="w-full">
+                  <div className="w-full cursor-pointer">
                       <img src={listing.imageUrls[3]} className='w-full rounded-md' alt="" />
                   </div> 
                 )}
                 {listing.imageUrls.length > 0 && (
-                  <div className="w-full">
+                  <div className="w-full cursor-pointer">
                       <img src={listing.imageUrls[4]} className='w-full rounded-md' alt="" />
                   </div> 
                 )}
@@ -192,15 +201,17 @@ export default function Listing() {
             </div>
             
             <div className="">
-              {currentUser && listing.userRef !== currentUser._id && !contact && (
+              {currentUser && listing.userRef !== currentUser._id && !contactOpen && (
                 <button
-                  onClick={() => setContact(true)}
+                  onClick={handleOpenContact}
                   className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
                 >
                   Contact landlord
                 </button>
               )}
-              {contact && <Contact listing={listing} />}
+              {contactOpen && (
+                  <Contact listing={listing} onClose={handleCloseContact} />
+              )}
             </div>
             <p className='text-slate-800'>
               <span className='font-semibold text-black'>Description - </span>
