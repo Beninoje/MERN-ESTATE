@@ -50,17 +50,17 @@ const SignIn = () => {
     }
   };
   return (
-    <div class="flex flex-col md:flex-row h-screen items-center">
-        <div class="hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-          <img src={homeImage} alt="" class="w-full h-full object-cover"/>
+    <div className="flex flex-col md:flex-row h-screen items-center">
+        <div className="hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+          <img src={homeImage} alt="" className="w-full h-full object-cover"/>
         </div>
-        <div class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+        <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
               flex items-center justify-center">
-          <div class="w-full h-100">
-            <h1 class="text-xl md:text-2xl font-bold title-color leading-tight mt-12">Log In To Your Account</h1>
-            <form class="mt-6" onSubmit={handleSubmit}>
+          <div className="w-full h-100">
+            <h1 className="md:text-3xl font-bold title-color leading-tight mt-12">Log In To Your Account</h1>
+            <form className="mt-6" onSubmit={handleSubmit}>
               <div>
-                <label class="block text-gray-700">Email Address</label>
+                <label className="block text-gray-700">Email Address</label>
                 <input
                   type='email'
                   placeholder='Email'
@@ -71,8 +71,8 @@ const SignIn = () => {
                 />
               </div>
 
-              <div class="mt-4">
-                <label class="block text-gray-700">Password</label>
+              <div className="mt-4">
+                <label className="block text-gray-700">Password</label>
                 <input
                   type='password'
                   placeholder='Password'
@@ -85,18 +85,18 @@ const SignIn = () => {
               </div>
 
               <button 
-                class="w-full block bg-[#E2BFB3] uppercase hover:opacity-80 transition-all ease-in duration-150 text-gray-900 text-lg font-semibold rounded-lg px-4 py-3 mt-6"
+                className="w-full block bg-[#E2BFB3] uppercase hover:opacity-80 transition-all ease-in duration-150 text-gray-900 text-lg font-semibold rounded-lg px-4 py-3 mt-6"
                 disabled={loading}>
                   {loading ? 'Loading...' : 'Sign In'}
               </button>
             </form>
-            <hr class="my-6 border-gray-300 w-full"/>
+            <hr className="my-6 border-gray-300 w-full"/>
 
             <OAuth/>
 
-            <p class="mt-8">Need an account? 
+            <p className="mt-8 flex item-center">Need an account? 
               <Link to={'/sign-up'}>
-                <a href="#" class="text-gray-900 hover:underline font-semibold pl-2">Create an account</a>
+                <p className="text-gray-900 hover:underline font-semibold pl-2">Create an account</p>
               </Link>
             </p>
           </div>
