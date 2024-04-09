@@ -4,23 +4,10 @@ import videoHouse from '../videos/house_tour.mp4';
 
 const VideoModal = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    //useEffect(()=>{
-    // const handleClickOutSideModal = (e) =>{
-    //   if(isModalOpen && !e.target.closest('.modal'))
-    //   {
-    //     setIsModalOpen(false);
-    //   }
-    //   document.addEventListener('click', handleClickOutSideModal);
-
-    //   return () =>{
-    //     document.removeEventListener('click', handleClickOutSideModal);
-    //   }
-    // };
-  //},[isModalOpen]);
   
-  const handleVideo = () =>{
-    setIsModalOpen(true);
-  }
+    const handleVideo = () =>{
+      setIsModalOpen(true);
+    }
   return (
     <div>
         <div 

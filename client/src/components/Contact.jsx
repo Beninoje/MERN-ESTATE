@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Link } from 'react-router-dom';
 
-const  Contact = ({listing,onClose }) => {
+const Contact = ({listing,onClose }) => {
   const [landlord, setLandlord] = useState(null);
   const { currentUser} = useSelector((state) => state.user);
   const [isContactOpen, setIsContactOpen] = useState(false);

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { gallary } from '../images/index.js'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
+
 import { useSelector } from 'react-redux';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
@@ -15,6 +17,9 @@ import {
   FaShare,
 } from 'react-icons/fa';
 import Contact from '../components/Contact';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import LisitingImgView from '../components/LisitingImgView.jsx';
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
@@ -23,10 +28,18 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [listingImgView, setListingImgView] = useState(false);
   // const [contact, setContact] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
+  
+  const handleOpenListingImgView = () => {
+    setListingImgView(true);
+  };
+  const handleCloseListingImgView = () => {
+    setListingImgView(false);
+  };
 
   const handleOpenContact = () => {
     setContactOpen(true);
@@ -64,7 +77,7 @@ export default function Listing() {
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
       {listing && !loading && !error && (
-        <div>
+        <div className='px-3'>
           <div className="flex justify-center items-center px-4 py-3">
             <div className="w-full">
               <h2 className='text-center text-3xl title-color font-semibold'>
@@ -85,7 +98,7 @@ export default function Listing() {
                 <span className='text-lg font-semibold desc-color'>Share</span>
             </div>
           </div>
-          <div className="flex justify-center container mx-auto gap-3 ">
+          <div className="flex justify-center container mx-auto gap-3 relative">
               {listing.imageUrls.length > 0 && (
                 <div className="w-full cursor-pointer flex-1">
                     <img src={listing.imageUrls[0]} alt="" className='w-full h-full rounded-md' />
@@ -113,7 +126,14 @@ export default function Listing() {
                   </div> 
                 )}
               </div>
-              
+              <button onClick={handleOpenListingImgView} className="absolute bottom-[20px] right-[30px] bg-[rgba(38,38,38,.75)] rounded-md px-5 py-2 flex items-center transition-all duration-200 hover:bg-[rgba(38,38,38,.5)]">
+                  <img src={gallary} alt="" className='w-[17px] h-[17px]' />
+                  <span className='text-white font-semibold text-lg'>+{listing.imageUrls.length}</span>
+                  
+              </button>
+              {listingImgView && (
+                  <LisitingImgView listing={listing} onClose={handleCloseListingImgView} />
+              )}
           </div>
             
             
@@ -126,6 +146,7 @@ export default function Listing() {
             <div className="flex col-span-3 justify-between items-center rounded-md listing-border-stroke px-4 py-9">
               <div className="">
                 <h2 className='text-3xl font-semibold title-color pb-4'>
+                
                   ${listing.offer
                     ? listing.discountPrice.toLocaleString('en-US')
                     : listing.regularPrice.toLocaleString('en-US')}

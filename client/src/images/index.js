@@ -24,6 +24,8 @@ import listing5 from './listing5.jpg';
 import listing6 from './listing6.jpg';
 import listing7 from './listing7.jpg';
 import listing8 from './listing8.jpg';
+import gallary from './gallary.png';
+import grid from './grid.png';
 export{
     homeImage,
     cottage,
@@ -50,5 +52,7 @@ export{
     listing5,
     listing6,
     listing7,
-    listing8
+    listing8,
+    gallary,
+    grid
 }
