@@ -3,7 +3,9 @@ import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/user.slice.js';
 import { useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFaceAngry } from '@fortawesome/free-solid-svg-icons';
+import { google } from '../images/index.js';
 export default function OAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,15 +31,16 @@ export default function OAuth() {
       dispatch(signInSuccess(data));
       navigate('/');
     } catch (error) {
-      console.log('could not sign in with google', error);
+      console.log('Could not sign in with google: ', error);
     }
   };
   return (
     <button
       onClick={handleGoogleClick}
       type='button'
-      className='bg-red-700 text-white p-3 rounded-lg uppercase hover:opacity-95'
+      className='w-full bg-[#ffffff] title-color flex items-center justify-center p-3 rounded-lg uppercase transition-all ease-in duration-150 font-semibold hover:bg-[#E2BFB3] border-2 border-[#E2BFB3]'
     >
+      <img src={google} alt="" className='w-[25px] h-[25px] mr-3' />
       Continue with google
     </button>
   );

@@ -2,6 +2,18 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import {useDispatch, useSelector} from 'react-redux';
 import {signInStart, signInSuccess, signInFailure } from '../redux/user/user.slice.js'
+import {
+  comprehensiveImg, 
+  homeImage, 
+  cottage,
+  apartment,
+  townhouse,
+  hotel,
+  bungalow,
+  videoImg1,
+  getStarted
+} from '../images/index.js'
+
 import OAuth from "../components/OAuth.jsx";
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -38,39 +50,59 @@ const SignIn = () => {
     }
   };
   return (
-    <div className='p-3 max-w-lg mx-auto mt-[50px]'>
-      <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          type='email'
-          placeholder='email'
-          className='border p-3 rounded-lg'
-          id='email'
-          onChange={handleChange}
-        />
-        <input
-          type='password'
-          placeholder='password'
-          className='border p-3 rounded-lg'
-          id='password'
-          onChange={handleChange}
-        />
+    <div class="flex flex-col md:flex-row h-screen items-center">
+        <div class="hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+          <img src={homeImage} alt="" class="w-full h-full object-cover"/>
+        </div>
+        <div class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+              flex items-center justify-center">
+          <div class="w-full h-100">
+            <h1 class="text-xl md:text-2xl font-bold title-color leading-tight mt-12">Log In To Your Account</h1>
+            <form class="mt-6" onSubmit={handleSubmit}>
+              <div>
+                <label class="block text-gray-700">Email Address</label>
+                <input
+                  type='email'
+                  placeholder='Email'
+                  className='border-2 p-3 rounded-lg w-full focus:border-[#E2BFB3] focus:border-2 focus:outline-none mt-2'
+                  id='email'
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-        <button
-          disabled={loading}
-          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
-        >
-          {loading ? 'Loading...' : 'Sign In'}
-        </button>
-        <OAuth/>
-      </form>
-      <div className='flex gap-2 mt-5'>
-        <p>Dont have an account?</p>
-        <Link to={'/sign-up'}>
-          <span className='text-blue-700'>Sign up</span>
-        </Link>
-      </div>
-      {error && <p className='text-red-500 mt-5'>{error}</p>}
+              <div class="mt-4">
+                <label class="block text-gray-700">Password</label>
+                <input
+                  type='password'
+                  placeholder='Password'
+                  className='border-2 p-3 rounded-lg w-full focus:border-[#E2BFB3] focus:border-2 focus:outline-none mt-2'
+                  id='password'
+                  onChange={handleChange}
+                  required
+                />
+                {error && <p className='text-red-500 mt-5'>{error}</p>}
+              </div>
+
+              <button 
+                class="w-full block bg-[#E2BFB3] uppercase hover:opacity-80 transition-all ease-in duration-150 text-gray-900 text-lg font-semibold rounded-lg px-4 py-3 mt-6"
+                disabled={loading}>
+                  {loading ? 'Loading...' : 'Sign In'}
+              </button>
+            </form>
+            <hr class="my-6 border-gray-300 w-full"/>
+
+            <OAuth/>
+
+            <p class="mt-8">Need an account? 
+              <Link to={'/sign-up'}>
+                <a href="#" class="text-gray-900 hover:underline font-semibold pl-2">Create an account</a>
+              </Link>
+            </p>
+          </div>
+          
+        </div>
+        
     </div>
   );
 }
