@@ -94,7 +94,7 @@ const SignIn = () => {
 
             <OAuth/>
 
-            <p className="mt-8 flex item-center">Need an account? 
+            <p className="mt-8 flex item-center">Need a account? 
               <Link to={'/sign-up'}>
                 <p className="text-gray-900 hover:underline font-semibold pl-2">Create an account</p>
               </Link>
