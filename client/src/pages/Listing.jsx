@@ -166,23 +166,26 @@ export default function Listing() {
                 </p>
               </div>
               <div className="flex flex-col gap-4">
-                <div className="flex justify-center items-center flex-col gap-2 ml-[150px]">
-                  <button className='text-center'>
-                  <svg width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_121_39)">
-                    <path d="M55.1537 8.52248C52.0118 5.38065 47.8524 3.66347 43.4132 3.66347C38.9739 3.66347 34.8018 5.39337 31.66 8.53519L30.0191 10.1761L28.3528 8.50976C25.211 5.36793 21.0261 3.62531 16.5868 3.62531C12.1603 3.62531 7.98818 5.35521 4.85908 8.48431C1.71726 11.6261 -0.0126503 15.7983 6.96507e-05 20.2375C6.96507e-05 24.6768 1.7427 28.8362 4.88452 31.978L28.7725 55.866C29.1033 56.1967 29.5484 56.3748 29.9809 56.3748C30.4134 56.3748 30.8586 56.2095 31.1893 55.8787L55.1282 32.0289C58.27 28.8871 59.9999 24.7149 59.9999 20.2757C60.0127 15.8364 58.2955 11.6643 55.1537 8.52248ZM52.7114 29.5994L29.9809 52.2408L7.3013 29.5612C4.8082 27.0681 3.43445 23.7609 3.43445 20.2375C3.43445 16.7141 4.79548 13.4069 7.28858 10.9265C9.76897 8.44616 13.0761 7.0724 16.5868 7.0724C20.1103 7.0724 23.4302 8.44616 25.9233 10.9393L28.798 13.814C29.4721 14.4881 30.5533 14.4881 31.2275 13.814L34.0767 10.9647C36.5698 8.47159 39.8897 7.09784 43.4004 7.09784C46.9111 7.09784 50.2183 8.4716 52.7114 10.952C55.2045 13.4451 56.5656 16.7523 56.5656 20.2757C56.5783 23.7991 55.2045 27.1063 52.7114 29.5994Z" fill="#D0191D"/>
-                    </g>
-                    <defs>
-                    <clipPath id="clip0_121_39">
-                    <rect width="60" height="60" fill="white"/>
-                    </clipPath>
-                    </defs>
-                  </svg>
-                  </button>
-                  <span className='title-color'>
-                    Favourites
-                  </span>
-                </div>
+                {currentUser && listing.userRef !== currentUser._id && (
+                  <div className="flex justify-center items-center flex-col gap-2 ml-[150px]"> 
+                      <button className='text-center'>
+                        <svg width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_121_39)">
+                          <path d="M55.1537 8.52248C52.0118 5.38065 47.8524 3.66347 43.4132 3.66347C38.9739 3.66347 34.8018 5.39337 31.66 8.53519L30.0191 10.1761L28.3528 8.50976C25.211 5.36793 21.0261 3.62531 16.5868 3.62531C12.1603 3.62531 7.98818 5.35521 4.85908 8.48431C1.71726 11.6261 -0.0126503 15.7983 6.96507e-05 20.2375C6.96507e-05 24.6768 1.7427 28.8362 4.88452 31.978L28.7725 55.866C29.1033 56.1967 29.5484 56.3748 29.9809 56.3748C30.4134 56.3748 30.8586 56.2095 31.1893 55.8787L55.1282 32.0289C58.27 28.8871 59.9999 24.7149 59.9999 20.2757C60.0127 15.8364 58.2955 11.6643 55.1537 8.52248ZM52.7114 29.5994L29.9809 52.2408L7.3013 29.5612C4.8082 27.0681 3.43445 23.7609 3.43445 20.2375C3.43445 16.7141 4.79548 13.4069 7.28858 10.9265C9.76897 8.44616 13.0761 7.0724 16.5868 7.0724C20.1103 7.0724 23.4302 8.44616 25.9233 10.9393L28.798 13.814C29.4721 14.4881 30.5533 14.4881 31.2275 13.814L34.0767 10.9647C36.5698 8.47159 39.8897 7.09784 43.4004 7.09784C46.9111 7.09784 50.2183 8.4716 52.7114 10.952C55.2045 13.4451 56.5656 16.7523 56.5656 20.2757C56.5783 23.7991 55.2045 27.1063 52.7114 29.5994Z" fill="#D0191D"/>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0_121_39">
+                          <rect width="60" height="60" fill="white"/>
+                          </clipPath>
+                          </defs>
+                        </svg>
+                      </button>
+                    <span className='title-color'>
+                      Favourites
+                    </span>
+                  </div>
+                )}
+                
                 <div className="flex gap-3 items-center">
                   <div className='flex flex-col items-center gap-1'>
                     <div className="flex items-center gap-1">
@@ -217,8 +220,8 @@ export default function Listing() {
                 </div>
               </div>
             </div>
-            
-            <div className="col-span-1 flex flex-col items-start justify-start rounded-md listing-border-stroke px-4 py-9">
+            {currentUser && listing.userRef !== currentUser._id && (
+              <div className="col-span-1 flex flex-col items-start justify-start rounded-md listing-border-stroke px-4 py-9">
               <h3 className='title-color font-semibold text-2xl'>Contact Owner</h3>
               {currentUser && listing.userRef !== currentUser._id && !contactOpen && (
                 <button
@@ -232,6 +235,8 @@ export default function Listing() {
                   <Contact listing={listing} onClose={handleCloseContact} />
               )}
             </div>
+            )}
+            
             <div className="col-span-3 rounded-md listing-border-stroke px-4 py-9 flex flex-col justify-start items-start">
               <h3 className='font-semibold title-color text-4xl'>Listing Description</h3>
               <p className='text-color pt-4'>

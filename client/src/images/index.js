@@ -27,6 +27,8 @@ import listing8 from './listing8.jpg';
 import gallary from './gallary.png';
 import grid from './grid.png';
 import google from './google.png';
+import eyeOpen from './eye-svgrepo-com.png';
+import eyeCrosses from './eye-slash-svgrepo-com.png'
 export{
     homeImage,
     cottage,
@@ -56,5 +58,7 @@ export{
     listing8,
     gallary,
     grid,
-    google
+    google,
+    eyeOpen,
+    eyeCrosses
 }

@@ -6,6 +6,7 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
+import { eyeOpen, eyeCrosses } from '../images/index.js';
 import { app } from '../firebase';
 import {
   updateUserStart,
@@ -26,6 +27,8 @@ export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [eyeIcon, setEyeIcon] = useState(eyeOpen);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
@@ -160,72 +163,130 @@ export default function Profile() {
       console.log(error.message);
     }
   }
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+    setEyeIcon(passwordVisible ? eyeOpen: eyeCrosses);
+  }
   return (
-    <div className='p-3 max-w-lg mx-auto mt-[50px]'>
-      <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          onChange={(e) => setFile(e.target.files[0])}
-          type='file'
-          ref={fileRef}
-          hidden
-          accept='image/*'
-        />
-        <img
-          onClick={() => fileRef.current.click()}
-          src={formData.avatar || currentUser.avatar}
-          alt='profile'
-          className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
-        />
-        <p className='text-sm self-center'>
-          {fileUploadError ? (
-            <span className='text-red-700'>
-              Error Image upload (image must be less than 2 mb)
-            </span>
-          ) : filePerc > 0 && filePerc < 100 ? (
-            <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
-          ) : filePerc === 100 ? (
-            <span className='text-green-700'>Image successfully uploaded!</span>
-          ) : (
-            ''
-          )}
-        </p>
-        <input
-          type='text'
-          placeholder='username'
-          defaultValue={currentUser.username}
-          id='username'
-          className='border p-3 rounded-lg'
-          onChange={handleChange}
-        />
-        <input
-          type='email'
-          placeholder='email'
-          id='email'
-          defaultValue={currentUser.email}
-          className='border p-3 rounded-lg'
-          onChange={handleChange}
-        />
-        <input
-          type='password'
-          placeholder='password'
-          onChange={handleChange}
-          id='password'
-          className='border p-3 rounded-lg'
-        />
-        <button
-          disabled={loading}
-          className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
-        >
-          {loading ? 'Loading...' : 'Update'}
-        </button>
-        <Link
-          className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
-          to={'/create-listing'}
-        >
-          Create Listing
-        </Link>
-      </form>
+    <div className='p-3 container mx-auto mt-[50px]'>
+      <h1 className='text-3xl font-semibold text-left mt-[100px] text-[50px]'>Profile</h1>
+      <div className="grid grid-cols-4 gap-4 mt-[100px]">
+        <div className="flex flex-col col-span-1 items-start justify-between w-full h-[200px] border-[#d3d3d3] border-[1px] rounded-md">
+          <div className="p-3  w-full border-l-4 border-[#0e0e0e] rounded-tl-md">
+            <span>General</span>
+          </div>
+          <div className="p-3 border-b-gray-200 w-full ">
+            <span>Personal Details</span>
+          </div>
+          <div className="p-3 border-b-gray-200 w-full ">
+            <span>About Me</span>
+          </div>
+        </div>
+        <div className="flex flex-col col-span-3 items-start justify-center w-full border-[#d3d3d3] border-[1px] rounded-md  ">
+          <div className="w-full text-left border-b-[1px] border-[#d3d3d3] px-10 py-4">
+            <h2 className='title-color text-[30px] font-semibold'>General</h2>
+          </div>
+          <form onSubmit={handleSubmit} className='flex flex-col  w-full'>
+            <div className="grid grid-cols-6 items-center w-full border-b-[1px] border-[#d3d3d3] px-10 py-4">
+              <div className="col-span-1">
+                <h2 className='desc-color text-[20px]'> Profile Picture</h2>
+              </div>
+              <div className="col-span-4">
+                <input
+                  onChange={(e) => setFile(e.target.files[0])}
+                  type='file'
+                  ref={fileRef}
+                  hidden
+                  accept='image/*'
+                />
+              <img
+                src={formData.avatar || currentUser.avatar}
+                alt='profile picture'
+                className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
+              />
+              </div>
+              <div className="cursor-pointer col-span-1 btn-color text-center title-color rounded-full font-bold py-2" onClick={() => fileRef.current.click()}>
+                <span>Upload New</span>
+              </div>
+              <p className='text-sm self-center'>
+                {fileUploadError ? (
+                  <span className='text-red-700'>
+                    Error Image upload (image must be less than 2 mb)
+                  </span>
+                ) : filePerc > 0 && filePerc < 100 ? (
+                  <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
+                ) : filePerc === 100 ? (
+                  <span className='text-green-700'>Image successfully uploaded!</span>
+                ) : (
+                  ''
+                )}
+              </p>
+            </div>
+          <div className="grid grid-cols-4 items-center gap-4 w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
+            <div className="col-span-1">
+              <h2 className='desc-color text-[20px]'>Username</h2>
+            </div>
+            <div className="col-span-3 w-full">
+              <input
+                type='text'
+                placeholder='username'
+                defaultValue={currentUser.username}
+                id='username'
+                className='border p-3 rounded-lg w-full outline-none'
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4 w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
+            <div className="col-span-1">
+              <h2 className='desc-color text-[20px]'>Email</h2>
+            </div>
+            <div className="col-span-3 w-full">
+              <input
+                type='email'
+                placeholder='email'
+                id='email'
+                defaultValue={currentUser.email}
+                className='border p-3 rounded-lg w-full outline-none'
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4 w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
+          <div className="col-span-1">
+              <h2 className='desc-color text-[20px]'>Password</h2>
+            </div>
+            <div className="col-span-3 w-full relative">
+              <input
+                type={passwordVisible ? 'text' : 'password'}
+                placeholder='password'
+                onChange={handleChange}
+                id='password'
+                className='border p-3 rounded-lg w-full outline-none'
+              />
+              <div onClick={togglePasswordVisibility} className="absolute cursor-pointer top-1/2 transform -translate-y-1/2 right-[10px] ">
+                <img src={eyeIcon} alt="" className='w-[25px] h-[25px]'/>
+              </div>
+            </div>
+            
+          </div>
+          
+          <button
+            disabled={loading}
+            className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
+          >
+            {loading ? 'Loading...' : 'Update'}
+          </button>
+          <Link
+            className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
+            to={'/create-listing'}
+          >
+            Create Listing
+          </Link>
+        </form>
+        </div>
+      </div>
+      
       <div className='flex justify-between mt-5'>
         <span
           className='text-red-700 cursor-pointer'
