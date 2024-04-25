@@ -32,6 +32,7 @@ export default function Profile() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [eyeIcon, setEyeIcon] = useState(eyeOpen);
   const [selectedCountry, setSelectedCountry] = useState('');
+  const [isDeleteAccPopupOpen, setIsDeleteAccPopupOpen] = useState(false);
   const [postalCode, setPostalCode] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [postalCodeError, setPostalCodeError] = useState('');
@@ -78,7 +79,14 @@ export default function Profile() {
       }
     );
   }
+  const handleDeleteAccountPopup = () => {
+    setIsDeleteAccPopupOpen(true);
+  }
 
+  const handleCancelDelete = () => {
+    // Close the delete confirmation popup
+    setIsDeleteAccPopupOpen(false);
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -227,7 +235,7 @@ export default function Profile() {
           <div
           onClick={() => toggleContentTab(3)} 
           className={toggleContent === 3 ? "active-tabs p-3" : "tabs"}>
-            <span>About Me</span>
+            <span>Manage Account</span>
           </div>
         </div>
         <div className={toggleContent === 1 ? "active-content flex flex-col col-span-3 items-start justify-center w-full border-[#d3d3d3] border-[1px] rounded-md" :" content "}>
@@ -416,43 +424,44 @@ export default function Profile() {
         </div>
         <div className={toggleContent === 3 ? "active-content flex flex-col col-span-3 items-start justify-center w-full border-[#d3d3d3] border-[1px] rounded-md" :" content "}>
           <div className="w-full text-left border-b-[1px] border-[#d3d3d3] px-10 py-4">
-            <h2 className='title-color text-[30px] font-semibold'>About Me</h2>
+            <h2 className='title-color text-[30px] font-semibold'>Manage Account</h2>
           </div>
-            <form onSubmit={handleSubmit} className='flex flex-col  w-full'>
-              <div className="grid grid-cols-6 items-center w-full border-b-[1px] border-[#d3d3d3] px-10 py-4">
-                <div className="col-span-1">
-                  <h2 className='desc-color text-[20px]'> Profile Picture</h2>
+            <div className='flex flex-col  w-full'>
+              <div className="flex justify-between items-center w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
+                <div className="">
+                  <h2 className='desc-color text-[20px]'>Delete Account</h2>
                 </div>
-                <div className="col-span-4">
-                  <input
-                    onChange={(e) => setFile(e.target.files[0])}
-                    type='file'
-                    ref={fileRef}
-                    hidden
-                    accept='image/*'
-                  />
-                <img
-                  src={formData.avatar || currentUser.avatar}
-                  alt='profile picture'
-                  className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
-                />
+                <div className="">
+                    <button
+                      className='alt-btn-color py-2 px-4 rounded-md font-semibold'
+                      onClick={handleDeleteAccountPopup}
+                    >
+                      Delete Account 
+                    </button>
+                    {isDeleteAccPopupOpen && (
+                      <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-10">
+                        <div className="bg-white p-8 rounded-md shadow-md">
+                          <p className="text-2xl mb-4 text-center">Are you sure you want to delete your account?</p>
+                          <p className="text-md mb-4 text-center">Deleting your account will result deleting all your personal info and listings</p>
+                          <div className="flex justify-evenly items-center mt-10">
+                            <button
+                              className="bg-red-500 transition-all duration-200 hover:opacity-70 text-white px-6 py-[7px] rounded-md"
+                              onClick={handleDeleteUser}
+                            >
+                              Confirm
+                            </button>
+                            <button
+                              className="bg-gray-500 transition-all duration-200 hover:opacity-70 text-white px-6 py-[7px] rounded-md"
+                              onClick={handleCancelDelete}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                 </div>
-                <div className="cursor-pointer col-span-1 btn-color text-center title-color rounded-full font-bold py-2" onClick={() => fileRef.current.click()}>
-                  <span>Upload New</span>
-                </div>
-                <p className='text-sm self-center'>
-                  {fileUploadError ? (
-                    <span className='text-red-700'>
-                      Error Image upload (image must be less than 2 mb)
-                    </span>
-                  ) : filePerc > 0 && filePerc < 100 ? (
-                    <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
-                  ) : filePerc === 100 ? (
-                    <span className='text-green-700'>Image successfully uploaded!</span>
-                  ) : (
-                    ''
-                  )}
-                </p>
+                  
               </div>
               <div className="grid grid-cols-4 items-center gap-4 w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
                 <div className="col-span-1">
@@ -511,7 +520,7 @@ export default function Profile() {
             </div> 
             
             
-          </form>
+          </div>
         </div>
       </div>
       

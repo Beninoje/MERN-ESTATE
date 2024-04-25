@@ -12,6 +12,14 @@
 .desc-color{
     color: #666666;
 }
+.alt-btn-color{
+    background-color: #F7DED0;
+    border:2px solid #F7DED0;
+    transition: all 0.2s ease;
+}
+.alt-btn-color:hover{
+    opacity: 0.8;
+}
 .btn-color{
     background-color: #E2BFB3;
     border:2px solid #E2BFB3;
