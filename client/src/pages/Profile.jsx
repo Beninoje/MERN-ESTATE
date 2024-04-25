@@ -463,74 +463,25 @@ export default function Profile() {
                 </div>
                   
               </div>
-              <div className="grid grid-cols-4 items-center gap-4 w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
-                <div className="col-span-1">
-                  <h2 className='desc-color text-[20px]'>Username</h2>
+              <div className="flex justify-between items-center w-full  px-10 py-6">
+                <div className="">
+                  <h2 className='desc-color text-[20px]'>Sign Out</h2>
                 </div>
-                <div className="col-span-3 w-full">
-                  <input
-                    type='text'
-                    placeholder='username'
-                    defaultValue={currentUser.username}
-                    id='username'
-                    className='border p-3 rounded-lg w-full outline-none'
-                    onChange={handleChange}
-                  />
+                <div className="">
+                    <button
+                      className='alt-btn-color py-2 px-10 rounded-md font-semibold'
+                      onClick={handleSignOutSubmit}
+                      >
+                      Sign Out 
+                    </button>
                 </div>
+                  
               </div>
-              <div className="grid grid-cols-4 items-center gap-4 w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
-                <div className="col-span-1">
-                  <h2 className='desc-color text-[20px]'>Email</h2>
-                </div>
-                <div className="col-span-3 w-full">
-                  <input
-                    type='email'
-                    placeholder='email'
-                    id='email'
-                    defaultValue={currentUser.email}
-                    className='border p-3 rounded-lg w-full outline-none'
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4 w-full border-b-[1px] border-[#d3d3d3] px-10 py-6">
-              <div className="col-span-1">
-                <h2 className='desc-color text-[20px]'>Password</h2>
-              </div>
-              <div className="col-span-3 w-full relative">
-                <input
-                  type={passwordVisible ? 'text' : 'password'}
-                  placeholder='password'
-                  onChange={handleChange}
-                  id='password'
-                  className='border p-3 rounded-lg w-full outline-none'
-                />
-                <div onClick={togglePasswordVisibility} className="absolute cursor-pointer top-1/2 transform -translate-y-1/2 right-[10px] ">
-                  <img src={eyeIcon} alt="" className='w-[25px] h-[25px]'/>
-                </div>
-              </div>
-            </div>
-           <div className="my-[30px] w-full flex justify-center">
-              <button
-                  disabled={loading}
-                  className='btn-color title-color font-semibold rounded-lg text-center py-3 px-7 uppercase '
-                >
-                {loading ? 'Loading...' : 'update account'}
-              </button>
-            </div> 
-            
-            
           </div>
         </div>
       </div>
       
       <div className='flex justify-between mt-5'>
-        <span
-          className='text-red-700 cursor-pointer'
-          onClick={handleDeleteUser}
-        >
-          Delete account
-        </span>
         <Link
             className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
             to={'/create-listing'}
