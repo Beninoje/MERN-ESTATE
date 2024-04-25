@@ -23,6 +23,10 @@ export const updateUser = async (req,res,next)=>{
                username: req.body.username,
                email: req.body.email,
                password: req.body.password,
+               fullName: req.body.fullName,
+               postalCode: req.body.postalCode,
+               address: req.body.address,
+               country: req.body.country,
                avatar: req.body.avatar, 
             }
        },{new:true})

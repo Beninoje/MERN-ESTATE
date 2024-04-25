@@ -40,7 +40,14 @@
     border: 1px solid #E1E1E1;
 }
 .active-tabs{
-    border-left: 3px solid #E2BFB3
+    border-left: 3px solid #E2BFB3;
+    background-color: #f5f5f5;
+}
+.tabs{
+    width: 100%;
+    cursor: pointer;
+    padding: 12px;
+    grid-row: span 1 / span 1;
 }
 .content{
     display:none !important;
