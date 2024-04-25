@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import  React , { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   getDownloadURL,
   getStorage,
@@ -33,6 +33,7 @@ export default function Profile() {
   const [eyeIcon, setEyeIcon] = useState(eyeOpen);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [isDeleteAccPopupOpen, setIsDeleteAccPopupOpen] = useState(false);
+  const [isDeleteListingPopupOpen, setIsDeleteListingPopupOpen] = useState(false);
   const [postalCode, setPostalCode] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [postalCodeError, setPostalCodeError] = useState('');
@@ -41,6 +42,7 @@ export default function Profile() {
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
+  const [showListings, setShowListings] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
@@ -84,8 +86,15 @@ export default function Profile() {
   }
 
   const handleCancelDelete = () => {
-    // Close the delete confirmation popup
     setIsDeleteAccPopupOpen(false);
+  };
+
+  const handleDeleteListingPopup = () => {
+    setIsDeleteListingPopupOpen(true);
+  }
+
+  const handleCancelDeleteListing = () => {
+    setIsDeleteListingPopupOpen(false);
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -147,6 +156,7 @@ export default function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
+      if (!showListings) {
       const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
       if(data.success === false)
@@ -155,7 +165,10 @@ export default function Profile() {
         return;
       }
       setUserListings(data);
-      
+    }else{
+      setUserListings([]);
+    }
+      setShowListings(prevState => !prevState);
     } catch (error) {
       setShowListingsError(true);
     }
@@ -236,6 +249,12 @@ export default function Profile() {
           onClick={() => toggleContentTab(3)} 
           className={toggleContent === 3 ? "active-tabs p-3" : "tabs"}>
             <span>Manage Account</span>
+          </div>
+          <div
+          onClick={() => toggleContentTab(4)}
+          
+          className={toggleContent === 4 ? "active-tabs p-3" : "tabs"}>
+            <span>Listings</span>
           </div>
         </div>
         <div className={toggleContent === 1 ? "active-content flex flex-col col-span-3 items-start justify-center w-full border-[#d3d3d3] border-[1px] rounded-md" :" content "}>
@@ -479,62 +498,105 @@ export default function Profile() {
               </div>
           </div>
         </div>
+        <div className={toggleContent === 4 ? "active-content flex flex-col col-span-3 items-start justify-center w-full border-[#d3d3d3] border-[1px] rounded-md" :" content "}>
+          <div className="w-full text-left border-b-[1px] border-[#d3d3d3] px-10 py-4">
+            <h2 className='title-color text-[30px] font-semibold'>Listings</h2>
+          </div>
+            <div className='flex flex-col  w-full'>
+              <div className="flex items-center justify-between px-10 py-6">
+                <button className="alt-btn-color py-[7px] px-5 rounded-md font-semibold" onClick={handleShowListings}>
+                  {userListings  && userListings.length > 0 ? 'Collapse Listings' : 'Show Listings'}
+                </button>
+                <Link
+                  className='border-4 border-[#F7DED0] py-[7px] px-5 font-semibold rounded-md transition-all ease duration-200 hover:bg-[#F7DED0]'
+                  to={'/create-listing'}
+                >
+                  Create Listing
+                </Link>
+              </div>
+                <div className="">
+                  {userListings && userListings.length > 0 &&
+                  userListings.map((listing)=>(
+                    <div 
+                      key={listing._id}
+                      className="py-3 px-5 flex justify-between items-center w-full border gap-3 rounded-md">
+                        <Link to={`/listing/${listing._id}`}>
+                          <img src={listing.imageUrls[0]} alt="listing image" className='h-[120px] w-[120px] object-contain'/>
+                        </Link>
+                        <Link className="flex-1 text-slate-700 font-semibold hover:underline truncate" 
+                          to={`/listing/${listing._id}`}
+                          >
+                            <p className='text-xl ml-4'>{listing.name}</p>
+                        </Link>
+
+                        <div className="flex justify-end items-center gap-4">
+                          <button 
+                            // onClick={() => handleDeleteListing(listing._id)}
+                            onClick={handleDeleteListingPopup}
+                            className=' bg-[#F7DED0] uppercase border-4 border-[#F7DED0] p-2 rounded-md transition-all ease duration-200 hover:bg-transparent'
+                          >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 11V17" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 11V17" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 7H20" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                          </button>
+                          {isDeleteListingPopupOpen && (
+                            <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-10">
+                              <div className="bg-white p-8 rounded-md shadow-md">
+                                <p className="text-2xl mb-4 text-center">Are you sure you want to delete your listing?</p>
+                                <p className="text-md mb-4 text-center">Deleting your listing will result deleting all your listing's info</p>
+                                <div className="flex justify-evenly items-center mt-10">
+                                  <button
+                                    className="bg-red-500 transition-all duration-200 hover:opacity-70 text-white px-6 py-[7px] rounded-md"
+                                    onClick={() => handleDeleteListing(listing._id)}
+                                  >
+                                    Confirm
+                                  </button>
+                                  <button
+                                    className="bg-gray-500 transition-all duration-200 hover:opacity-70 text-white px-6 py-[7px] rounded-md"
+                                    onClick={handleCancelDeleteListing}
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          <Link to={`/update-listing/${listing._id}`}>
+                            <button 
+                            className='border-4 rounded-md border-[#F7DED0] uppercase p-2 transition-all ease duration-200 hover:bg-[#F7DED0]'
+                            >
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M20 16V20C20 20.5304 19.7893 21.0391 19.4142 21.4142C19.0391 21.7893 18.5304 22 18 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V6C2 5.46957 2.21071 4.96086 2.58579 4.58579C2.96086 4.21071 3.46957 4 4 4H8" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M12.5 15.8L22 6.2L17.8 2L8.3 11.5L8 16L12.5 15.8Z" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </button>
+                          </Link>
+                        </div>
+                    </div>
+                  ))
+                }  
+              </div>
+          </div>
+        </div>
       </div>
       
       <div className='flex justify-between mt-5'>
-        <Link
-            className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
-            to={'/create-listing'}
-          >
-            Create Listing
-          </Link>
-        <span 
-        className='text-red-700 cursor-pointer'
-        onClick={handleSignOutSubmit}>
-          Sign out
-        </span>
+        
       </div>
 
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
       <p className='text-green-700 mt-5'>
         {updateSuccess ? 'User is updated successfully!' : ''}
       </p>
-      <button onClick={handleShowListings} className='text-green-700 w-full'>Show Listings</button>
       <p className='text-red-700 text-xs'>{showListingsError ? 'Error showing listings' : ''}</p>
       <div className="flex flex-col items-center justify-center gap-6">
-      {userListings && userListings.length > 0 &&
-        userListings.map((listing)=>(
-          <div 
-            key={listing._id}
-            className="p-3 flex justify-between items-center w-full border rounded-md">
-              <Link to={`/listing/${listing._id}`}>
-                <img src={listing.imageUrls[0]} alt="listing image" className='h-20 w-20 object-contain'/>
-              </Link>
-              <Link className="flex-1 text-slate-700 font-semibold hover:underline truncate" 
-                to={`/listing/${listing._id}`}
-                >
-                  <p>{listing.name}</p>
-              </Link>
-
-              <div className="flex flex-col items-center gap-2">
-                <button 
-                onClick={() => handleDeleteListing(listing._id)}
-                className='text-red-700 uppercase'
-                >
-                  Delete
-                </button>
-                <Link to={`/update-listing/${listing._id}`}>
-                  <button 
-                  className='text-green-700 uppercase'
-                  >
-                    Edit
-                  </button>
-                </Link>
-              </div>
-          </div>
-        ))
       
-      }
       </div>
       
     </div>
