@@ -39,6 +39,15 @@
 .listing-border-stroke{
     border: 1px solid #E1E1E1;
 }
+.active-tabs{
+    border-left: 3px solid #E2BFB3
+}
+.content{
+    display:none !important;
+}
+.active-content{
+    display: flex !important;
+}
 /* .swiper-pagination{
     bottom:0px !important;
 } */
