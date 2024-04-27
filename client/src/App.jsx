@@ -10,6 +10,7 @@ import CreateListing from "./pages/CreateListing";
 import UpdateListing from "./pages/UpdateListing";
 import Listing from "./pages/Listing";
 import Search from "./pages/Search";
+import Favourite from "./pages/Favourite";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             path='/update-listing/:listingId'
             element={<UpdateListing />}
           />
+          <Route path="/favourites" element={<Favourite/>}/>
         </Route>
         <Route path="/sign-up" element={<SignUp/>}/>
       </Routes>
