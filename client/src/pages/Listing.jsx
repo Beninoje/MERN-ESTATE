@@ -18,8 +18,6 @@ import {
   FaShare,
 } from 'react-icons/fa';
 import Contact from '../components/Contact';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import LisitingImgView from '../components/LisitingImgView.jsx';
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
@@ -30,6 +28,7 @@ export default function Listing() {
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
   const [listingImgView, setListingImgView] = useState(false);
+  const [favouriteMessage, setFavouriteMessage] = useState('')
   // const [contact, setContact] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const params = useParams();
@@ -51,32 +50,34 @@ export default function Listing() {
     setContactOpen(false);
   };
   const handleAddToFavourite = async (listingId) => {
+    navigate('/favourites');
     try {
         const res = await fetch(`/api/user/${currentUser._id}/favourites/${listingId}`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
         });
+        console.log("Data processing");
         const data = await res.json();
-        if(data.success)
-        {
-          console.log("Response:", data);
-          
+
+        if (data.success === true) {
+            if (currentUser && currentUser.favorites.includes(listingId)) {
+                setFavouriteMessage('This listing is already in your favourites');
+            } 
+            else{
+              navigate('/favourites');
+            }
+        } else {
+            setFavouriteMessage(data.message);
         }
- 
-        else if (data.success === false) {
-            console.log("Error:", data.message);
-            navigate('/favourites');
-        }
-        else{
-          navigate('/favourites');
-        }
-        
     } catch (error) {
         console.log("Error:", error.message);
     }
 };
+
+
+
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -209,6 +210,7 @@ export default function Listing() {
                           </defs>
                         </svg>
                       </button>
+                      <span className='title-color'>{favouriteMessage}</span>
                     <span className='title-color'>
                       Favourites
                     </span>

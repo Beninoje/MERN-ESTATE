@@ -28,7 +28,9 @@ import gallary from './gallary.png';
 import grid from './grid.png';
 import google from './google.png';
 import eyeOpen from './eye-svgrepo-com.png';
-import eyeCrosses from './eye-slash-svgrepo-com.png'
+import eyeCrosses from './eye-slash-svgrepo-com.png';
+import heartEmpty from './heart-empty.svg';
+import heartFull from './heart-full.svg';
 export{
     homeImage,
     cottage,
@@ -60,5 +62,7 @@ export{
     grid,
     google,
     eyeOpen,
-    eyeCrosses
+    eyeCrosses,
+    heartEmpty,
+    heartFull
 }

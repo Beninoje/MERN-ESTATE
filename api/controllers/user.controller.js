@@ -99,3 +99,31 @@ export const addToFavourites = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getUserFavourites = async (req, res, next) => {
+    try {
+        const userId = req.params.userId; 
+        
+        if (req.user.id !== userId) {
+            return next(errorHandler(401, 'You can only view your own favourites'));
+        }
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return next(errorHandler(404, 'User not found'));
+        }
+
+        const favouriteListingIds = user.favorites;
+
+        const favouriteListings = await Listing.find({
+            _id: {
+                $in: favouriteListingIds
+            }
+        });
+
+        res.status(200).json(favouriteListings);
+    } catch (error) {
+        next(error);
+    }
+};
