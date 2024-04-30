@@ -50,7 +50,7 @@ export default function Listing() {
     setContactOpen(false);
   };
   const handleAddToFavourite = async (listingId) => {
-    navigate('/favourites');
+    
     try {
         const res = await fetch(`/api/user/${currentUser._id}/favourites/${listingId}`, {
             method: 'POST',
@@ -60,12 +60,14 @@ export default function Listing() {
         });
         console.log("Data processing");
         const data = await res.json();
-
+        window.location.reload();
+        navigate('/favourites');
         if (data.success === true) {
             if (currentUser && currentUser.favorites.includes(listingId)) {
                 setFavouriteMessage('This listing is already in your favourites');
             } 
             else{
+              window.location.reload();
               navigate('/favourites');
             }
         } else {

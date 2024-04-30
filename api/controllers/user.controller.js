@@ -100,6 +100,28 @@ export const addToFavourites = async (req, res, next) => {
     }
 };
 
+export const removeFromFavourites = async (req, res, next) => {
+    try {
+        const {userId, listingId} = req.params;
+        const user = await User.findByIdAndUpdate(userId, {
+            $pull: { favorites: listingId }
+        });
+    
+        if(!user)
+        {
+            return next(errorHandler(404, 'User no found!'));
+        }
+
+        if(!user.favorites.includes(listingId))
+        {
+            return res.status(400).json({message: 'Listing is not in favourites'})
+        }
+        await user.save();
+        res.status(200).json({message: 'Listing has been removed from favourites'})
+    } catch (error) {
+        next(error);
+    }
+};
 export const getUserFavourites = async (req, res, next) => {
     try {
         const userId = req.params.userId; 
