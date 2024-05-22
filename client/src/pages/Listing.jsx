@@ -50,7 +50,7 @@ export default function Listing() {
     setContactOpen(false);
   };
   const handleAddToFavourite = async (listingId) => {
-    
+
     try {
         const res = await fetch(`/api/user/${currentUser._id}/favourites/${listingId}`, {
             method: 'POST',
@@ -60,11 +60,11 @@ export default function Listing() {
         });
         console.log("Data processing");
         const data = await res.json();
-        if (data.success) {
-            window.location.reload();
-            navigate('/favourites');
+        if (data.success === false) {
+          setFavouriteMessage(data.message);
+          return;
         } else {
-            setFavouriteMessage(data.message);
+          window.location.href = '/favourites';
         }
     } catch (error) {
         console.log("Error:", error.message);

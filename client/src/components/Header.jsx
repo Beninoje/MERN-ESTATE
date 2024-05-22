@@ -2,7 +2,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-
+import { heartFull } from '../images/index.js'
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -56,6 +56,9 @@ const Header = () => {
             ) : (
               <li className=' text-slate-700 hover:underline'> Sign in</li>
             )}
+          </Link>
+          <Link to="/favourites">
+            <img src={heartFull} alt="" className='h-[30px] w-[30px] ' />
           </Link>
       </ul>
       </div>
