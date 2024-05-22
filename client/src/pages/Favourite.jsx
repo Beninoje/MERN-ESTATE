@@ -67,8 +67,8 @@ const Favourite = () => {
         <h1 className='text-4xl'>My Favourites</h1>
       </div>
       <div className="grid grid-cols-4 container gap-4  mx-auto">
-      
-        {listing.map((listing) => (
+        {listing.length > 0 ?(
+        listing.map((listing) => (
             <div key={listing._id} className="flex flex-col col-span-1 border rounded-md px-3 py-4">
                 <div className="flex justify-end py-3">
                   <button onClick={() => handleRemoveFromFavourites(listing._id)}>
@@ -134,7 +134,14 @@ const Favourite = () => {
               </div>
           
           
-        ))}
+        ))
+        ) : (
+          <div className="">
+            <h2 className='pb-6'>You have no favorites!</h2>
+            <Link to="/search?searchTerm=" className='text-lg font-semibold  alt-btn-color py-2 px-4 rounded-lg'>Find More Here</Link>
+          </div>
+        )}
+
       </div>
     </div>
   )
